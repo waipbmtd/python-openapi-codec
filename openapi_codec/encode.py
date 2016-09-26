@@ -10,6 +10,8 @@ def generate_swagger_object(document):
     return {
         'swagger': '2.0',
         'info': _get_info_object(document),
+        'tags': document.tags,
+        'definitions': document.definitions,
         'paths': _get_paths_object(document),
         'host': parsed_url.netloc,
     }
@@ -42,7 +44,8 @@ def _get_operation(tag, link):
     return {
         'tags': [tag],
         'description': link.description,
-        'responses': _get_responses(link),
+        'summary': link.summary,
+        'responses': link.responses,
         'parameters': _get_parameters(link.fields)
     }
 
@@ -57,7 +60,7 @@ def _get_parameters(fields):
             'required': field.required,
             'in': _convert_location_to_in(field),
             'description': field.description,
-            'type': 'string'
+            'type': field.type
         }
         for field in fields
     ]
@@ -74,9 +77,10 @@ def _get_responses(link):
     Returns minimally acceptable responses object based
     on action / method type.
     """
-    template = {'description': ''}
-    if link.action == 'post':
-        return {'201': template}
-    if link.action == 'delete':
-        return {'204': template}
-    return {'200': template}
+    return link.responses
+    # template = {'description': ''}
+    # if link.action == 'post':
+    #     return {'201': template}
+    # if link.action == 'delete':
+    #     return {'204': template}
+    # return {'200': template}

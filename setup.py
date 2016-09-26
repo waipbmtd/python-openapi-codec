@@ -52,16 +52,16 @@ if sys.argv[-1] == 'publish':
 
 
 setup(
-    name='openapi-codec',
+    name='openapi-codec-devin',
     version=version,
-    url='http://github.com/core-api/python-openapi-codec/',
+    url='https://github.com/waipbmtd/python-openapi-codec',
     license='BSD',
     description='An OpenAPI codec for Core API.',
-    author='Tom Christie',
-    author_email='tom@tomchristie.com',
+    author='Devin',
+    author_email='waipbmtd@gmail.com',
     packages=get_packages('openapi_codec'),
     package_data=get_package_data('openapi_codec'),
-    install_requires=['coreapi'],
+    install_requires=['coreapi-devin'],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
